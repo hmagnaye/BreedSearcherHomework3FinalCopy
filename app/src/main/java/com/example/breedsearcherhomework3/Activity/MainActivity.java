@@ -22,12 +22,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button searchButton = findViewById(R.id.searchButton1);
+
+        Button favButton = findViewById(R.id.favBreedButton);
+
         final Fragment searchFragment = new BreedSearchFragment();
         final Fragment favFragment = new FavouriteBreedFragment();
         swapFragment(searchFragment);
 
-        Button searchButton = findViewById(R.id.searchButton);
-        Button favButton = findViewById(R.id.favBreed);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

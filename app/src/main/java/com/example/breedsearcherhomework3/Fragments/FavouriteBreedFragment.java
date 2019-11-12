@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.homework3.R;
+import com.example.breedsearcherhomework3.R;
 
 public class FavouriteBreedFragment extends Fragment {
 

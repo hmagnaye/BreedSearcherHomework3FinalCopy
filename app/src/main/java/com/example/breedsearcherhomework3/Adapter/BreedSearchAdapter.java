@@ -1,5 +1,7 @@
 package com.example.breedsearcherhomework3.Adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.breedsearcherhomework3.Activity.BreedDetailActivity;
 import com.example.breedsearcherhomework3.Model.Breed;
 
 //jihjkj
@@ -62,7 +65,15 @@ public class BreedSearchAdapter extends RecyclerView.Adapter<BreedSearchAdapter.
         public void bind(final Breed breed) {
             breedName.setText(breed.getName());
 
-            //view.setOnClickListener(new View.OnClickListener());
+            view.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Context context = view.getContext();
+
+                    Intent intent = new Intent(context, BreedDetailActivity.class);
+                    intent.putExtra("id", breed.getId());
+                    context.startActivity(intent);
+                }
+            });
 
         }
 

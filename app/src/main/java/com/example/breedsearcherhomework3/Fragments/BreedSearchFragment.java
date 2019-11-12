@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.breedsearcherhomework3.Adapter.BreedSearchAdapter;
+import com.example.breedsearcherhomework3.Database.BreedDatabase;
 import com.example.breedsearcherhomework3.Model.Breed;
 import com.example.breedsearcherhomework3.R;
 import com.google.gson.Gson;
@@ -80,6 +81,7 @@ public class BreedSearchFragment  extends Fragment {
                 Gson gson = new Gson();
 
                 Breed[] breedSearchResult = gson.fromJson(response, Breed[].class);
+                BreedDatabase.saveBreedsToFakeDatabase(Arrays.asList(breedSearchResult));
                 breedAdapter.setData(Arrays.asList(breedSearchResult));
                 recyclerView.setAdapter(breedAdapter);
                 System.out.println("Adapter has been set");
