@@ -34,8 +34,8 @@ public class BreedSearchAdapter extends RecyclerView.Adapter<BreedSearchAdapter.
                 LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.breed_viewholder, parent, false);
 
-        BreedSearchViewHolder bookViewHolder = new BreedSearchViewHolder(view);
-        return bookViewHolder;
+        BreedSearchViewHolder breedViewHolder = new BreedSearchViewHolder(view);
+        return breedViewHolder;
     }
 
     @Override

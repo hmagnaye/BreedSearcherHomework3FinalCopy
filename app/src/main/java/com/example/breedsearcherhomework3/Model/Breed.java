@@ -11,6 +11,31 @@ public class Breed {
     private int dog_friendly;
     private Weight weight;
 
+    private class Weight {
+        private String imperial;
+        private String metric;
+
+        public void setImperial(String imperial) {
+            this.imperial = imperial;
+        }
+
+        public void setMetric(String metric) {
+            this.metric = metric;
+        }
+
+        public Weight() {
+        }
+
+        public String getImperial() {
+            return imperial;
+        }
+
+        public String getMetric() {
+            return metric;
+        }
+
+    }
+
     public Weight getWeight() {
         return weight;
     }
@@ -84,22 +109,7 @@ public class Breed {
     }
 
 
-    private class Weight {
-        private String imperial;
-        private String metric;
 
-        public Weight() {
-        }
-
-        public String getImperial() {
-            return imperial;
-        }
-
-        public String getMetric() {
-            return metric;
-        }
-
-    }
 }
 
 

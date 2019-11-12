@@ -7,7 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class BreedDatabase {
-    public static HashMap<String, Breed> breeds = new HashMap<>();
+    private static HashMap<String, Breed> breeds = new HashMap<>();
+
+    public static HashMap<String, Breed> getBreeds() {
+        return breeds;
+    }
 
     public static Breed getBreedByID(String id) {
         return breeds.get(id);
