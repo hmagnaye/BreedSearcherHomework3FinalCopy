@@ -75,6 +75,16 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavB
         public void bind(final Breed breed) {
             breedName.setText(breed.getName());
 
+            view.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Context context = view.getContext();
+
+                    Intent intent = new Intent(context, BreedDetailActivity.class);
+                    intent.putExtra("id", breed.getId());
+                    context.startActivity(intent);
+                }
+            });
+
 
         }
 

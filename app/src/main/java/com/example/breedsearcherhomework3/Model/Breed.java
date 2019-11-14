@@ -11,7 +11,7 @@ public class Breed {
     private int dog_friendly;
     private Weight weight;
 
-    private class Weight {
+    public class Weight {
         public String imperial;
         public String metric;
 

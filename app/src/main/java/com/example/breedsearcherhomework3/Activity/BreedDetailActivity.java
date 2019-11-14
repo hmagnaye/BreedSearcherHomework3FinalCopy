@@ -8,12 +8,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.breedsearcherhomework3.Database.BreedDatabase;
 import com.example.breedsearcherhomework3.Database.FavBreedsDatabase;
 import com.example.breedsearcherhomework3.Model.Breed;
+import com.example.breedsearcherhomework3.Model.CatImage;
 import com.example.breedsearcherhomework3.R;
+import com.google.gson.Gson;
+
 
 
 public class BreedDetailActivity extends AppCompatActivity {
@@ -36,7 +47,6 @@ public class BreedDetailActivity extends AppCompatActivity {
         TextView dogFriendly = findViewById(R.id.textView2);
         Button button = findViewById(R.id.addBreedButton);
         TextView weight = findViewById(R.id.weight);
-        ImageView catImage = findViewById(R.id.imageView);
 
 
 
@@ -58,18 +68,18 @@ public class BreedDetailActivity extends AppCompatActivity {
         setText(breed.getDescription(), description);
         setText(breed.getWikipedia_url(), wiki);
         setText(Integer.toString(breed.getDog_friendly()), dogFriendly);
-        Glide.with(getApplicationContext()).load("https://cdn2.thecatapi.com/images/dN6eoeLjY.jpg").into(catImage);
 
+        String apikey = "880bafd2-5d32-4024-a66a-fc56637d678e";
+        String url = "https://api.thecatapi.com/v1/images/search?api_key="+apikey+"&breed_id="+breed.getId();
 
-
-
-
-
+        setCatImage(url, this.findViewById(android.R.id.content));
 
 
 
 
     }
+
+
 
 
 
@@ -85,8 +95,6 @@ public class BreedDetailActivity extends AppCompatActivity {
 
         System.out.println(textView.getText());
 
-
-
     }
 
     public void setText(int num, TextView textView){
@@ -100,6 +108,63 @@ public class BreedDetailActivity extends AppCompatActivity {
         }
 
     }
+
+    private void setCatImage(String url, final View view){
+
+        //creates a RequestQueue, which is basically a list of requests
+        RequestQueue mRequestQueue = Volley.newRequestQueue(view.getContext());
+
+
+        //operates if there's a response from the server
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            //"response" is basically the string that contains the json data
+            public void onResponse(String response) {
+                System.out.println("Thing works");
+
+                //create a new gson object
+                Gson gson = new Gson();
+
+                System.out.println("This is the value of response;" + response);
+                CatImage[] catImage = gson.fromJson(response, CatImage[].class);
+                ImageView catImageView = findViewById(R.id.imageView);
+
+                try {
+                    // the reason I hardcoded this is because since all GET request in this case only returns one breed
+                    Glide.with(getApplicationContext()).load(catImage[0].getUrl()).into(catImageView);
+                    System.out.println("Json does work");
+
+                } catch (Exception e) {
+                    System.out.println("Json does not work");
+                    e.printStackTrace();
+                    Glide.with(getApplicationContext()).load("https://cdn2.thecatapi.com/images/dN6eoeLjY.jpg").into(catImageView);
+                }
+
+            }
+        };
+        //operates if there is an error or simply no responses
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("Error");
+            }
+        };
+
+
+        //asks for a string from the address contained in the "url" string via the GET method, using the the last two arguments to state the types of listeners to use if there is a response and if there is not.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, responseListener, errorListener);
+
+        //adds previous request to the mRequestQueue.
+        mRequestQueue.add(stringRequest);
+
+
+
+
+
+
+    }
+
+
 
 
 }
