@@ -12,8 +12,8 @@ public class Breed {
     private Weight weight;
 
     private class Weight {
-        private String imperial;
-        private String metric;
+        public String imperial;
+        public String metric;
 
         public void setImperial(String imperial) {
             this.imperial = imperial;
