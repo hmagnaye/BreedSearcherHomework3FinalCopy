@@ -70,21 +70,23 @@ public class BreedDetailActivity extends AppCompatActivity {
         setText(breed.getDescription(), description);
         setText(breed.getWikipedia_url(), wiki);
         setText(" Dog friendly level " + Integer.toString(breed.getDog_friendly()), dogFriendly);
-        setText("Weight range in imperial is " + setWeightText(breed.getWeight().getImperial()) + " pounds", weightImperial);
-        setText("Weight range in metric is "+ setWeightText(breed.getWeight().getImperial()) + " kilograms", weightMetric);
 
-
-    }
-
-    //due to the nature of weight, this deals with a case where weight is null
-    private String setWeightText(String string){
-        if(string == null){
-            return "not available";
+        if(breed.getWeight() != null){
+            setText("Metric weight is " + breed.getWeight().getMetric() + "kgs", weightMetric);
+            setText("Imperial weight is " + breed.getWeight().getMetric() + "lb", weightImperial);
         }
         else{
-            return string;
+            setText("Metric weight is null",  weightMetric);
+            setText("Imperial weight is null", weightImperial);
         }
+
+
+
+
+
     }
+
+
 
     //Aims to deal with a case where not all of the data is returned
     private void setText(String string, TextView textView){
