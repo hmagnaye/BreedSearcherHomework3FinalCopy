@@ -49,7 +49,7 @@ public class BreedDetailActivity extends AppCompatActivity {
         TextView weightMetric = findViewById(R.id.weightMetric);
 
 
-//for adding breeds to favourites
+   //for adding breeds to favourites
         addBreedButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 FavBreedsDatabase.getFavBreeds().put(intentID, breed);
@@ -71,7 +71,7 @@ public class BreedDetailActivity extends AppCompatActivity {
         setText(breed.getWikipedia_url(), wiki);
         setText(" Dog friendly level " + Integer.toString(breed.getDog_friendly()), dogFriendly);
         setText("Weight range in imperial is " + setWeightText(breed.getWeight().getImperial()) + " pounds", weightImperial);
-        setText("Weight range in metric is "+ setWeightText( breed.getWeight().getImperial()) + " kilograms", weightMetric);
+        setText("Weight range in metric is "+ setWeightText(breed.getWeight().getImperial()) + " kilograms", weightMetric);
 
 
     }
