@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class FavBreedsDatabase {
-
-
+    //hashmap allows for the same breed not to appear more than once
         private static HashMap<String, Breed> favBreeds = new HashMap<>();
 
         public static Breed getBreedByID(String id) {

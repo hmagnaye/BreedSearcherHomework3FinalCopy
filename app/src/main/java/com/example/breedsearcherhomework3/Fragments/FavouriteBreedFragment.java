@@ -27,11 +27,13 @@ public class FavouriteBreedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //
         View view = inflater.inflate(R.layout.fav_breed_recycler_view, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.rv);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
         FavouriteAdapter favouriteAdapter = new FavouriteAdapter();
+        //gets data from the database to be set in the adapter
         List<Breed> list = new ArrayList<Breed>(FavBreedsDatabase.getFavBreeds().values());
         favouriteAdapter.setData(list);
         recyclerView.setAdapter(favouriteAdapter);

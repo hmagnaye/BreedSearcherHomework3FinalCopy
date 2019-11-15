@@ -44,13 +44,13 @@ public class BreedDetailActivity extends AppCompatActivity {
         TextView temperament  = findViewById(R.id.temperament);
         TextView wiki = findViewById(R.id.wikipedia);
         TextView dogFriendly = findViewById(R.id.textView2);
-        Button button = findViewById(R.id.addBreedButton);
+        Button addBreedButton = findViewById(R.id.addBreedButton);
         TextView weightImperial = findViewById(R.id.weightImperial);
         TextView weightMetric = findViewById(R.id.weightMetric);
 
 
-
-        button.setOnClickListener(new View.OnClickListener() {
+//for adding breeds to favourites
+        addBreedButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 FavBreedsDatabase.getFavBreeds().put(intentID, breed);
                 Toast.makeText(getBaseContext(),"Breed added", Toast.LENGTH_SHORT).show();
@@ -63,8 +63,6 @@ public class BreedDetailActivity extends AppCompatActivity {
 
         setCatImage(url, this.findViewById(android.R.id.content));
 
-
-
         setText(breed.getName(), name);
         setText("Lifespan is; " + breed.getLife_span(), lifespan);
         setText("This breed is from " + breed.getOrigin(), origin);
@@ -72,21 +70,27 @@ public class BreedDetailActivity extends AppCompatActivity {
         setText(breed.getDescription(), description);
         setText(breed.getWikipedia_url(), wiki);
         setText(" Dog friendly level " + Integer.toString(breed.getDog_friendly()), dogFriendly);
-        setText("Weight range in imperial is " + breed.getWeight().getImperial() + " pounds", weightImperial);
-        setText("Weight range in metric is "+ breed.getWeight().getMetric() + " kilograms", weightMetric);
-
-
-
-
-
+        setText("Weight range in imperial is " + setWeightText(breed.getWeight().getImperial()) + " pounds", weightImperial);
+        setText("Weight range in metric is "+ setWeightText( breed.getWeight().getImperial()) + " kilograms", weightMetric);
 
 
     }
 
+    //due to the nature of weight, this deals with a case where weight is null
+    private String setWeightText(String string){
+        if(string == null){
+            return "not available";
+        }
+        else{
+            return string;
+        }
+    }
+
+    //Aims to deal with a case where not all of the data is returned
     private void setText(String string, TextView textView){
         try{
             textView.setText(string);
-
+            System.out.println(string);
         }
         catch(NullPointerException ex){
             textView.setText(R.string.no_value);
@@ -128,13 +132,11 @@ public class BreedDetailActivity extends AppCompatActivity {
                 System.out.println("Json does work");
 
 
-                //aim to factor in if the url cannot be found
+                //aim to ensure things are able to be displayed if the image url cannot be found
                 try {
                     // the reason I hardcoded this is because since all GET request in this case only returns one breed
                     Glide.with(getApplicationContext()).load(catImage[0].getUrl()).into(catImageView);
                     System.out.println("Image was loaded");
-
-
                 } catch (Exception e) {
                     System.out.println("Json does not work");
                     e.printStackTrace();
@@ -143,7 +145,7 @@ public class BreedDetailActivity extends AppCompatActivity {
 
             }
         };
-        //operates if there is an error or simply no responses
+        //operates if there is an error or simply no response for the image url
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {

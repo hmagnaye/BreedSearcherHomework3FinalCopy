@@ -18,14 +18,17 @@ import com.example.breedsearcherhomework3.R;
 
 import java.util.List;
 
+//loads data from search results into a view holder
+
 public class BreedSearchAdapter extends RecyclerView.Adapter<BreedSearchAdapter.BreedSearchViewHolder>{
 
     private List<Breed> breedsToAdapt;
 
     public void setData(List<Breed> articlesToAdapt) {
-        // This is basically a Setter that we use to give data to the adapter
+        // This is basically a setter that we use to give data to the adapter
         this.breedsToAdapt = articlesToAdapt;
     }
+
 
     @NonNull
     @Override

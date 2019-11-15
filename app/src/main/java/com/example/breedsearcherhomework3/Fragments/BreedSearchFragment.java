@@ -29,6 +29,7 @@ public class BreedSearchFragment  extends Fragment {
         // Required empty public constructor iuhkvlfkjhgfd
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -36,6 +37,8 @@ public class BreedSearchFragment  extends Fragment {
 
         final SearchView searchBar = view.findViewById(R.id.searchBar);
 
+
+        //allows the results to be updated in real time as the user changes the words in their bar
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -61,6 +64,7 @@ public class BreedSearchFragment  extends Fragment {
 
     }
 
+    // basiclly setting the data from the json response
     private void searchBreed(String url, final View view){
 
         //creates a RequestQueue, which is basically a list of requests
@@ -81,6 +85,7 @@ public class BreedSearchFragment  extends Fragment {
                 //create a new gson object
                 Gson gson = new Gson();
 
+                //convert results to java objects and adds them to a hashmap, see "Database" package
                 Breed[] breedSearchResult = gson.fromJson(response, Breed[].class);
                 BreedDatabase.saveBreedsToFakeDatabase(Arrays.asList(breedSearchResult));
                 breedAdapter.setData(Arrays.asList(breedSearchResult));

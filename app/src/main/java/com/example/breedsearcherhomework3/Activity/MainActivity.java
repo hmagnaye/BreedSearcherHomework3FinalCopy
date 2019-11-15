@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //makes the code for swaping a fragment cleaner
     private void swapFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

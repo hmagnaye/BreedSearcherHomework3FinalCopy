@@ -59,9 +59,11 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavB
 
     @Override
     public int getItemCount() {
+
         return favBreedsToAdapt.size();
     }
 
+//class defines the viewholder object for each breed
     public class FavBreedsViewHolder extends RecyclerView.ViewHolder{
         public View view;
         public TextView breedName;
@@ -74,6 +76,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavB
 
         public void bind(final Breed breed) {
             breedName.setText(breed.getName());
+
 
             view.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
