@@ -72,8 +72,8 @@ public class BreedDetailActivity extends AppCompatActivity {
         setText(breed.getDescription(), description);
         setText(breed.getWikipedia_url(), wiki);
         setText(" Dog friendly level " + Integer.toString(breed.getDog_friendly()), dogFriendly);
-        setText("Weight range in imperial is " + breed.getWeight().getImperial() + "pounds", weightImperial);
-        setText("Weight range in metric is "+ breed.getWeight().getMetric() + "kilograms", weightMetric);
+        setText("Weight range in imperial is " + breed.getWeight().getImperial() + " pounds", weightImperial);
+        setText("Weight range in metric is "+ breed.getWeight().getMetric() + " kilograms", weightMetric);
 
 
 
