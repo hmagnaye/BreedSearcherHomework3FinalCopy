@@ -41,6 +41,7 @@ public class BreedSearchFragment  extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 String url = "https://api.thecatapi.com/v1/breeds/search?q=" + searchBar.getQuery();
                 searchBreed(url, view);
+                System.out.println("Search results found");
                 return true;
             }
 
